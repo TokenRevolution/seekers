@@ -273,7 +273,7 @@ function isValidPhone(phone) {
 }
 
 // Form submission
-function submitForm() {
+async function submitForm() {
     const submitButton = document.querySelector('.submit-button');
     const originalText = submitButton.innerHTML;
     
@@ -281,12 +281,74 @@ function submitForm() {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Invocazione in corso...';
     submitButton.disabled = true;
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+        // Check if Firebase is available
+        if (!window.firebaseDb) {
+            throw new Error('Firebase non è disponibile. Riprova più tardi.');
+        }
+
+        // Collect form data
+        const form = document.getElementById('registrationForm');
+        const formData = new FormData(form);
+        
+        const data = {
+            name1: formData.get('name1'),
+            surname1: formData.get('surname1'),
+            email1: formData.get('email1'),
+            phone1: formData.get('phone1'),
+            age1: formData.get('age1'),
+            name2: formData.get('name2'),
+            surname2: formData.get('surname2'),
+            email2: formData.get('email2'),
+            phone2: formData.get('phone2'),
+            age2: formData.get('age2'),
+            teamName: formData.get('team-name'),
+            experience: formData.get('experience'),
+            motivation: formData.get('motivation'),
+            newsletter: formData.get('newsletter') === 'on'
+        };
+
+        // Save to Firebase
+        const docRef = await window.firebaseAddDoc(
+            window.firebaseCollection(window.firebaseDb, "registrations"), 
+            {
+                // Partecipante 1
+                participant1: {
+                    name: data.name1,
+                    surname: data.surname1,
+                    email: data.email1,
+                    phone: data.phone1,
+                    age: parseInt(data.age1)
+                },
+                // Partecipante 2
+                participant2: {
+                    name: data.name2,
+                    surname: data.surname2,
+                    email: data.email2,
+                    phone: data.phone2,
+                    age: parseInt(data.age2)
+                },
+                // Informazioni aggiuntive
+                teamName: data.teamName || null,
+                experience: data.experience || 'novice',
+                motivation: data.motivation || null,
+                newsletter: data.newsletter || false,
+                // Metadata
+                timestamp: window.firebaseServerTimestamp(),
+                status: 'pending'
+            }
+        );
+        
+        console.log("Registrazione salvata con ID: ", docRef.id);
         showSuccessMessage();
+        
+    } catch (error) {
+        console.error("Errore durante il salvataggio: ", error);
+        showErrorMessage(error.message);
+    } finally {
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
-    }, 3000); // Increased to 3 seconds for more dramatic effect
+    }
 }
 
 function showSuccessMessage() {
@@ -364,6 +426,79 @@ function showSuccessMessage() {
 
     // Reset form
     document.getElementById('registrationForm').reset();
+}
+
+function showErrorMessage(errorMsg) {
+    // Create error modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 26, 10, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    `;
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: linear-gradient(145deg, #1a2f1a, #0f1f0f);
+        padding: 3rem;
+        border-radius: 15px;
+        text-align: center;
+        max-width: 600px;
+        margin: 20px;
+        transform: scale(0.8);
+        transition: transform 0.5s ease;
+        border: 2px solid #0a1a0a;
+        box-shadow: 0 0 40px rgba(10, 26, 10, 0.4);
+    `;
+
+    modalContent.innerHTML = `
+        <div style="color: #0a1a0a; font-size: 5rem; margin-bottom: 1.5rem;">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h2 style="color: #0a1a0a; margin-bottom: 1.5rem; font-size: 2rem;">
+            Le Forze Oscure si Oppongono
+        </h2>
+        <p style="color: #cccccc; line-height: 1.8; margin-bottom: 2rem; font-size: 1.1rem;">
+            Un'energia maligna ha interferito con l'invocazione: <br>
+            <em style="color: #d4af37;">${errorMsg}</em><br><br>
+            Riprova più tardi quando le stelle saranno più favorevoli.
+        </p>
+        <button onclick="this.closest('.modal').remove()" style="
+            background: linear-gradient(135deg, #1a2f1a, #1a3a1a, #0a1a0a);
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        " onmouseover="this.style.transform='translateY(-3px)'" 
+           onmouseout="this.style.transform='translateY(0)'">
+            Compreso
+        </button>
+    `;
+
+    modal.className = 'modal';
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Animate modal appearance
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modalContent.style.transform = 'scale(1)';
+    }, 10);
 }
 
 // Scroll effects

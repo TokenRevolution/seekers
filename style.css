@@ -595,6 +595,18 @@ body {
     background: rgba(26, 47, 26, 0.9);
 }
 
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(204, 204, 204, 0.6);
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.form-group input:focus::placeholder,
+.form-group textarea:focus::placeholder {
+    color: rgba(212, 175, 55, 0.7);
+}
+
 .form-group textarea {
     resize: vertical;
     min-height: 100px;

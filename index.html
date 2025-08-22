@@ -135,26 +135,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name1">Nome Vero *</label>
-                            <input type="text" id="name1" name="name1" value="Marco" required>
+                            <input type="text" id="name1" name="name1" placeholder="Il tuo nome" required>
                         </div>
                         <div class="form-group">
                             <label for="surname1">Cognome di Sangue *</label>
-                            <input type="text" id="surname1" name="surname1" value="Rossi" required>
+                            <input type="text" id="surname1" name="surname1" placeholder="Il tuo cognome" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email1">Contatto Spirituale *</label>
-                            <input type="email" id="email1" name="email1" value="marco.rossi@email.com" required>
+                            <input type="email" id="email1" name="email1" placeholder="nome@email.com" required>
                         </div>
                         <div class="form-group">
                             <label for="phone1">Linea d'Emergenza *</label>
-                            <input type="tel" id="phone1" name="phone1" value="123 456 7890" required>
+                            <input type="tel" id="phone1" name="phone1" placeholder="123 456 7890" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="age1">Anni di Esistenza *</label>
-                        <input type="number" id="age1" name="age1" min="18" max="99" value="25" required>
+                        <input type="number" id="age1" name="age1" min="18" max="99" placeholder="18" required>
                     </div>
                 </div>
 
@@ -163,26 +163,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name2">Nome Vero *</label>
-                            <input type="text" id="name2" name="name2" value="Sara" required>
+                            <input type="text" id="name2" name="name2" placeholder="Il nome del partner" required>
                         </div>
                         <div class="form-group">
                             <label for="surname2">Cognome di Sangue *</label>
-                            <input type="text" id="surname2" name="surname2" value="Bianchi" required>
+                            <input type="text" id="surname2" name="surname2" placeholder="Il cognome del partner" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email2">Contatto Spirituale *</label>
-                            <input type="email" id="email2" name="email2" value="sara.bianchi@email.com" required>
+                            <input type="email" id="email2" name="email2" placeholder="partner@email.com" required>
                         </div>
                         <div class="form-group">
                             <label for="phone2">Linea d'Emergenza *</label>
-                            <input type="tel" id="phone2" name="phone2" value="098 765 4321" required>
+                            <input type="tel" id="phone2" name="phone2" placeholder="098 765 4321" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="age2">Anni di Esistenza *</label>
-                        <input type="number" id="age2" name="age2" min="18" max="99" value="23" required>
+                        <input type="number" id="age2" name="age2" min="18" max="99" placeholder="18" required>
                     </div>
                 </div>
 
@@ -190,29 +190,30 @@
                     <h3>L'Oscura Alleanza</h3>
                     <div class="form-group">
                         <label for="team-name">Nome del Patto</label>
-                        <input type="text" id="team-name" name="team-name" value="I Guardiani dell'Ombra" placeholder="Es. I Custodi dell'Ombra">
+                        <input type="text" id="team-name" name="team-name" placeholder="Es. I Custodi dell'Ombra, Gli Esploratori Perduti...">
                     </div>
                     <div class="form-group">
                         <label for="experience">Esperienza nelle Arti Oscure</label>
                         <select id="experience" name="experience">
+                            <option value="" disabled selected>Seleziona il tuo livello...</option>
                             <option value="novice">Novizio</option>
-                            <option value="apprentice" selected>Apprendista</option>
+                            <option value="apprentice">Apprendista</option>
                             <option value="master">Maestro delle Ombre</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="motivation">Perché la vostra anima brama questo potere?</label>
-                        <textarea id="motivation" name="motivation" placeholder="Confessate la vostra più oscura motivazione...">Cerchiamo di scoprire i segreti ancestrali nascosti nelle ombre della città per ottenere la conoscenza proibita.</textarea>
+                        <textarea id="motivation" name="motivation" placeholder="Confessate la vostra più oscura motivazione... Cosa vi spinge a cercare i segreti nascosti? Quale mistero volete svelare?"></textarea>
                     </div>
                 </div>
 
                 <div class="form-section">
                     <div class="checkbox-group">
-                        <input type="checkbox" id="terms" name="terms" checked required>
+                        <input type="checkbox" id="terms" name="terms" required>
                         <label for="terms">Accetto i termini del patto e rinuncio alla mia anima in caso di fallimento *</label>
                     </div>
                     <div class="checkbox-group">
-                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <input type="checkbox" id="newsletter" name="newsletter">
                         <label for="newsletter">Desidero ricevere convocazioni per futuri rituali</label>
                     </div>
                 </div>
@@ -233,10 +234,8 @@
                     <h4>Seekers</h4>
                     <p>Nel buio della notte, i segreti attendono di essere svelati da chi ha il coraggio di cercare.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/seekers_insearchofortune?igsh=MTdvemNmZmNudHkwNw%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@seekers_insearchofouture?_t=ZN-8z6EirZpbMs&_r=1"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>

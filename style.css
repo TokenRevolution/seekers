@@ -1080,6 +1080,8 @@ html {
     color: var(--text-gold);
     text-shadow: var(--glow);
     animation: pulse-glow 2s ease-in-out infinite;
+    padding: 0 1rem;
+    flex-shrink: 0;
 }
 
 .highlight-content h4 {

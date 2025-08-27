@@ -651,4 +651,34 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         // Service worker can be added later for offline functionality
     });
-} 
+}
+
+// GDPR Cookie Consent Banner
+document.addEventListener('DOMContentLoaded', function() {
+    const cookieConsent = document.getElementById('cookieConsent');
+    const acceptButton = document.getElementById('acceptCookies');
+    
+    // Check if user has already accepted cookies
+    const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+    
+    // Show banner if cookies haven't been accepted yet
+    if (!cookiesAccepted) {
+        setTimeout(() => {
+            cookieConsent.classList.add('show');
+        }, 1000); // Show after 1 second
+    }
+    
+    // Handle accept button click
+    acceptButton.addEventListener('click', function() {
+        // Store acceptance in localStorage
+        localStorage.setItem('cookiesAccepted', 'true');
+        
+        // Hide the banner with animation
+        cookieConsent.classList.remove('show');
+        
+        // Remove the banner from DOM after animation
+        setTimeout(() => {
+            cookieConsent.style.display = 'none';
+        }, 400);
+    });
+}); 
